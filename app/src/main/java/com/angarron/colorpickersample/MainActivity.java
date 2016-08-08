@@ -1,4 +1,4 @@
-package com.agarron.colorpickersample;
+package com.angarron.colorpickersample;
 
 import android.os.Bundle;
 import android.support.annotation.ColorInt;
@@ -7,8 +7,8 @@ import android.view.View;
 import android.widget.GridView;
 import android.widget.Toast;
 
-import com.agarron.colorpicker.OnColorSelectedListener;
-import com.agarron.colorpicker.PaletteAdapter;
+import com.angarron.colorpicker.OnColorSelectedListener;
+import com.angarron.colorpicker.PaletteAdapter;
 
 public class MainActivity extends AppCompatActivity implements OnColorSelectedListener {
 

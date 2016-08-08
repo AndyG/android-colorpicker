@@ -1,4 +1,4 @@
-package com.agarron.colorpicker;
+package com.angarron.colorpicker;
 
 import org.junit.Test;
 

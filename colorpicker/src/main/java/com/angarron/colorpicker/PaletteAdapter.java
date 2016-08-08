@@ -1,4 +1,4 @@
-package com.agarron.colorpicker;
+package com.angarron.colorpicker;
 
 import android.content.Context;
 import android.content.res.Resources;

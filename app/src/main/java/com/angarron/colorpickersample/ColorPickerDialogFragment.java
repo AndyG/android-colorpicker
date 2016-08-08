@@ -1,4 +1,4 @@
-package com.agarron.colorpickersample;
+package com.angarron.colorpickersample;
 
 import android.app.Dialog;
 import android.content.DialogInterface;
@@ -12,8 +12,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.GridView;
 
-import com.agarron.colorpicker.OnColorSelectedListener;
-import com.agarron.colorpicker.PaletteAdapter;
+import com.angarron.colorpicker.OnColorSelectedListener;
+import com.angarron.colorpicker.PaletteAdapter;
 
 public class ColorPickerDialogFragment extends DialogFragment implements OnColorSelectedListener {
     private static final String ARG_COLORS_ARRAY_KEY = "colorsArray";
