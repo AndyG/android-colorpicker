@@ -114,13 +114,19 @@ public class PaletteAdapter extends BaseAdapter implements OnColorSelectedListen
         private @ColorInt int[] colorArray;
         private float itemSizeDp = defaultItemSizeDp;
         private @ColorInt int selectedColor = DEFAULT_SELECTED_COLOR;
+        private OnColorSelectedListener listener;
 
         public Builder(final Context context) {
             this.context = context;
             colorArray = getColorArray(context, defaultColorResArray);
         }
 
-        public Builder setColorResArray(final @ColorInt int[] colorResArray) {
+        public Builder setColorArray(final @ColorInt int[] colorArray) {
+            this.colorArray = colorArray;
+            return this;
+        }
+
+        public Builder setColorResArray(final int[] colorResArray) {
             colorArray = new int[colorResArray.length];
             for (int i = 0; i < colorResArray.length; i++) {
                 colorArray[i] = context.getResources().getColor(colorResArray[i]);
@@ -138,8 +144,15 @@ public class PaletteAdapter extends BaseAdapter implements OnColorSelectedListen
             return this;
         }
 
+        public Builder setOnColorSelectedListener(final OnColorSelectedListener listener) {
+            this.listener = listener;
+            return this;
+        }
+
         public PaletteAdapter build() {
-            return new PaletteAdapter(context, colorArray, selectedColor, itemSizeDp);
+            PaletteAdapter paletteAdapter = new PaletteAdapter(context, colorArray, selectedColor, itemSizeDp);
+            paletteAdapter.setOnColorSelectedListener(listener);
+            return paletteAdapter;
         }
     }
 }
