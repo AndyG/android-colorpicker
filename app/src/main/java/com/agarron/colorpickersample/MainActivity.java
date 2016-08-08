@@ -22,6 +22,7 @@ public class MainActivity extends AppCompatActivity implements OnColorSelectedLi
         GridView colorsGridView = (GridView) findViewById(R.id.colors_gridview);
         new PaletteAdapter.Builder(this)
             .setItemSizeDp(80)
+            .setSelectedColor(getResources().getColor(android.R.color.holo_red_dark))
             .build()
             .configure(colorsGridView);
 

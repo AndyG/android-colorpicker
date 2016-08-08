@@ -78,7 +78,7 @@ public class PaletteAdapter extends BaseAdapter implements OnColorSelectedListen
 
             colorItem.setOnColorSelectedListener(this);
 
-            colorItem.setSelected(colorArray[i] == selectedColor);
+            colorItem.setChecked(colorArray[i] == selectedColor);
 
             return colorItem;
         } else {
