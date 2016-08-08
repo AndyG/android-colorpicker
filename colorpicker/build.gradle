@@ -14,7 +14,7 @@ ext {
     siteUrl = 'https://github.com/angarron/android-colorpicker'
     gitUrl = 'https://github.com/angarron/android-colorpicker.git'
 
-    libraryVersion = '0.1.3'
+    libraryVersion = '0.1.3k'
 
     developerId = 'angarron'
     developerName = 'Anderson Garron'
