@@ -71,14 +71,12 @@ public class PaletteAdapter extends BaseAdapter implements OnColorSelectedListen
         if (oldView == null) {
 
             // if it's not recycled, initialize some attributes
-            ColorItem colorItem = new ColorItem(context, colorArray[i], false);
+            ColorItem colorItem = new ColorItem(context, colorArray[i], colorArray[i] == selectedColor);
 
             final int itemSizePX = dpToPx(itemSizeDP);
             colorItem.setLayoutParams(new GridView.LayoutParams(itemSizePX, itemSizePX));
 
             colorItem.setOnColorSelectedListener(this);
-
-            colorItem.setChecked(colorArray[i] == selectedColor);
 
             return colorItem;
         } else {
