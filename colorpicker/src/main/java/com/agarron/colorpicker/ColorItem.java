@@ -164,7 +164,6 @@ public class ColorItem extends FrameLayout implements View.OnClickListener {
 
     @Override
     public void onClick(View v) {
-        //todo: impl
         setChecked(!mIsSelected);
         if (mIsSelected && listener != null) {
             listener.onColorSelected(mColor);
@@ -172,7 +171,7 @@ public class ColorItem extends FrameLayout implements View.OnClickListener {
     }
 
     private Drawable createBackgroundDrawable() {
-        GradientDrawable mask = new GradientDrawable();
+        final GradientDrawable mask = new GradientDrawable();
         mask.setShape(GradientDrawable.OVAL);
         if (mOutlineWidth != 0) {
             mask.setStroke(mOutlineWidth, isColorDark(mColor) ? Color.WHITE : Color.BLACK);
