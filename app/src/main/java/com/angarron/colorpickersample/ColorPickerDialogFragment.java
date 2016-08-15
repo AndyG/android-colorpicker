@@ -51,7 +51,7 @@ public class ColorPickerDialogFragment extends DialogFragment implements OnColor
         PaletteAdapter paletteAdapter = new PaletteAdapter.Builder(getContext())
             .setItemSizeDp(60)
             .setSelectedColor(selectedColor)
-            .setColorResArray(colorsArray)
+            .setColorArray(colorsArray)
             .build();
 
         paletteAdapter.configure(colorsGridView);

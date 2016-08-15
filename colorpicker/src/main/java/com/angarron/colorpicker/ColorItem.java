@@ -27,7 +27,7 @@ public class ColorItem extends FrameLayout implements View.OnClickListener {
     private int mColor;
 
     private boolean mIsSelected = false;
-    private OnColorSelectedListener listener;
+    private OnColorItemSelectedListener listener;
 
     public ColorItem(Context context, @ColorInt int color, boolean isSelected) {
         super(context);
@@ -49,7 +49,7 @@ public class ColorItem extends FrameLayout implements View.OnClickListener {
         init();
     }
 
-    public void setOnColorSelectedListener(OnColorSelectedListener listener) {
+    public void setOnSelectedListener(OnColorItemSelectedListener listener) {
         this.listener = listener;
     }
 
@@ -70,6 +70,10 @@ public class ColorItem extends FrameLayout implements View.OnClickListener {
         LayoutInflater.from(getContext()).inflate(R.layout.color_item, this, true);
         mItemCheckmark = (ImageView) findViewById(R.id.selected_checkmark);
         mItemCheckmark.setColorFilter(isColorDark(mColor) ? Color.WHITE : Color.BLACK);
+    }
+
+    public int getColor() {
+        return mColor;
     }
 
     /**
@@ -115,10 +119,10 @@ public class ColorItem extends FrameLayout implements View.OnClickListener {
                 .scaleY(1.0f)
                 .setDuration(250)
                 .setListener(new AnimatorListenerAdapter() {
-
                     @Override
                     public void onAnimationEnd(Animator animation) {
-                        setItemCheckmarkAttributes(1.0f);
+                        mItemCheckmark.setVisibility(mIsSelected ? View.VISIBLE : View.INVISIBLE);
+                        setItemCheckmarkAttributes(mIsSelected ? 1.0f : 0.0f);
                     }
                 }).start();
         } else if (oldChecked && !mIsSelected) {
@@ -133,11 +137,10 @@ public class ColorItem extends FrameLayout implements View.OnClickListener {
                 .scaleY(0.0f)
                 .setDuration(250)
                 .setListener(new AnimatorListenerAdapter() {
-
                     @Override
                     public void onAnimationEnd(Animator animation) {
-                        mItemCheckmark.setVisibility(View.INVISIBLE);
-                        setItemCheckmarkAttributes(0.0f);
+                        mItemCheckmark.setVisibility(mIsSelected ? View.VISIBLE : View.INVISIBLE);
+                        setItemCheckmarkAttributes(mIsSelected ? 1.0f : 0.0f);
                     }
                 }).start();
         } else {
@@ -164,9 +167,11 @@ public class ColorItem extends FrameLayout implements View.OnClickListener {
 
     @Override
     public void onClick(View v) {
-        setChecked(!mIsSelected);
-        if (mIsSelected && listener != null) {
-            listener.onColorSelected(mColor);
+        if (!mIsSelected) {
+            setChecked(true);
+            if (mIsSelected && listener != null) {
+                listener.onColorItemSelected(this);
+            }
         }
     }
 
@@ -212,5 +217,9 @@ public class ColorItem extends FrameLayout implements View.OnClickListener {
         Color.colorToHSV(color, hsv);
         hsv[2] = hsv[2] * 0.5f;
         return Color.HSVToColor(hsv);
+    }
+
+    public interface OnColorItemSelectedListener {
+        void onColorItemSelected(ColorItem colorItem);
     }
 }

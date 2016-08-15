@@ -9,7 +9,7 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.GridView;
 
-public class PaletteAdapter extends BaseAdapter implements OnColorSelectedListener {
+public class PaletteAdapter extends BaseAdapter implements ColorItem.OnColorItemSelectedListener {
 
     private static float defaultItemSizeDp = 30;
 
@@ -32,6 +32,8 @@ public class PaletteAdapter extends BaseAdapter implements OnColorSelectedListen
 
     @ColorInt
     private int selectedColor;
+
+    private ColorItem selectedItem;
 
     private OnColorSelectedListener listener;
 
@@ -71,12 +73,16 @@ public class PaletteAdapter extends BaseAdapter implements OnColorSelectedListen
         if (oldView == null) {
 
             // if it's not recycled, initialize some attributes
-            ColorItem colorItem = new ColorItem(context, colorArray[i], colorArray[i] == selectedColor);
+            boolean isSelectedColor = colorArray[i] == selectedColor;
+            ColorItem colorItem = new ColorItem(context, colorArray[i], isSelectedColor);
+            if (isSelectedColor) {
+                selectedItem = colorItem;
+            }
 
             final int itemSizePX = dpToPx(itemSizeDP);
             colorItem.setLayoutParams(new GridView.LayoutParams(itemSizePX, itemSizePX));
 
-            colorItem.setOnColorSelectedListener(this);
+            colorItem.setOnSelectedListener(this);
 
             return colorItem;
         } else {
@@ -85,8 +91,12 @@ public class PaletteAdapter extends BaseAdapter implements OnColorSelectedListen
     }
 
     @Override
-    public void onColorSelected(final @ColorInt int color) {
-        selectedColor = color;
+    public void onColorItemSelected(final ColorItem colorItem) {
+        if (selectedItem != null) {
+            selectedItem.setChecked(false);
+        }
+        selectedItem = colorItem;
+        selectedColor = colorItem.getColor();
         if (listener != null) {
             listener.onColorSelected(selectedColor);
         }

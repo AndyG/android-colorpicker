@@ -36,7 +36,7 @@ public class MainActivity extends AppCompatActivity implements OnColorSelectedLi
 
     private void launchColorPicker() {
         int[] colors = getColors();
-        ColorPickerDialogFragment.create(colors).show(getSupportFragmentManager(), TAG_COLOR_PICKER);
+        ColorPickerDialogFragment.create(colors, colors[0]).show(getSupportFragmentManager(), TAG_COLOR_PICKER);
     }
 
     private int[] getColors() {
